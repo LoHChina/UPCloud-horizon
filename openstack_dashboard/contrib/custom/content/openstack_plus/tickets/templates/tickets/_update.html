@@ -1,0 +1,118 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block form_id %}update_ticket_form{% endblock %}
+{% block form_action %}{% url 'horizon:openstack_plus:tickets:update' ticket_id %}{% endblock %}
+
+{% block modal-header %}{% trans "Manage Ticket" %}{% endblock %}
+
+{% block modal-body %}
+<div class="left">
+    <fieldset>
+    {% include "horizon/common/_form_fields.html" %}
+    </fieldset>
+</div>
+<div class="right">
+    {% if type == "quota" %}
+    <h4>{% trans "Ticket detail:" %}</h4>
+    <table class="flavor_table table-striped">
+        <tbody class="ticket_tbody"> 
+            <tr><td>{% trans "Instance" %}</td><td>{{ticket.instances}}</td></tr>
+            <tr><td>{% trans "VCPUs" %}</td><td>{{ticket.cores}}</td></tr>
+            <tr><td>{% trans "RAM(MB)" %}</td><td>{{ticket.ram}}</td></tr>
+            <tr><td>{% trans "Floating Ips" %}</td><td>{{ticket.floating_ips}}</td></tr>
+            <tr><td>{% trans "Routers" %}</td><td>{{ticket.router}}</td></tr>
+            <tr><td>{% trans "Ports" %}</td><td>{{ticket.port}}</td></tr>
+            <tr><td>{% trans "Networks" %}</td><td>{{ticket.network}}</td></tr>
+            <tr><td>{% trans "Subnets" %}</td><td>{{ticket.subnet}}</td></tr>
+            <tr><td>{% trans "Volumes" %}</td><td>{{ticket.volumes}}</td></tr>
+            <tr><td>{% trans "Total Size of Volumes and Snapshots (GB)" %}</td><td>{{ticket.gigabytes}}</td></tr>
+            <tr><td>{% trans "Security Groups" %}</td><td>{{ticket.security_groups}}</td></tr>
+            <tr><td>{% trans "Key Pairs" %}</td><td>{{ticket.keypair}}</td></tr>
+        </tbody>
+    </table>
+    {% elif type == "volume" %}
+    <h4>{% trans "Volume" %}</h4>
+    <table class="flavor_table table-striped">
+        <tbody class="ticket_tbody">
+            <tr><td>{% trans "Name" %}</td><td>{{ volume.name }}</td></tr>
+            <tr><td>{% trans "Description" %} </td><td>{{volume.description}}</td></tr>
+            {% if volume.availability_zone %}
+            <tr><td>{% trans "Availability Zone" %}</td><td>{{volume.availability_zone}}</td></tr>
+            {% endif %}
+            {% if volume.volume_source_type == "volume_source" %}
+                <tr><td>{% trans "Volume Source" %}</td>
+                    <td>
+                    {% if volume_source_error %}
+                        ERROR
+                    {% else %}
+                        <a href="{% url "horizon:project:volumes:volumes:detail" volume_source.id %}">{{ volume_source.name }}</a>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% elif volume.volume_source_type == "image_source" %}
+                <tr><td>{%trans "Volume Source" %}</td>
+                    <td>
+                    {% if volume_source_error %}
+                        ERROR
+                    {% else %}
+                        <a href="{% url "horizon:project:images:images:detail" volume_source.id %}">{{ volume_source.name }}</a>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% elif volume.volume_source_type == "snapshot_source" %}
+                <tr><td>{% trans "Volume Source" %}</td>
+                    <td>
+                    {% if volume_source_error %}
+                        ERROR
+                    {% else %}
+                        <a href="{% url "horizon:project:volumes:snapshots:detail"  volume_source.id %}">{{ volume_source.name }}
+                    {% endif %}
+                    </a>
+                    </td>
+                </tr>
+            {% endif %}
+            <tr><td>{% trans "Size (GB)" %} </td><td>{{volume.size}}</td></tr>
+        </tbody>
+    </table>
+    {% elif type == "instance" %}
+    <h4>{% trans "Instance" %}</h4>
+    <table class="flavor_table table-striped">
+        <tbody class="ticket_tbody">
+            <tr><td>{% trans "Name" %} </td><td>{{ instance.name }}</td></tr>
+            <tr><td>{% trans "RAM" %}</td><td>{{ flavor.ram }}MB</td></tr>
+            <tr><td>{% trans "VCPUs" %}</td><td>{{ flavor.vcpus }}</td></tr>
+            {% if instance.availability_zone %}
+            <tr><td>{% trans "Availability Zone" %} </td><td>{{instance.availability_zone}}</td></tr>
+            {% endif %}
+            <tr><td>{% trans "Count" %} </td><td>{{ instance.count }}</td></tr>
+        </tbody>
+    </table>
+    {% elif type == "resize_volume" %}
+    <h4>{% trans "Resize Volume" %}</h4>
+    <table class="flavor_table table-striped">
+        <tbody class="ticket_tbody">
+            <tr><td>{% trans "Name" %} </td><td>{{ volume.name }}</td></tr>
+            <tr><td>{% trans "Origin Size" %} </td><td>{{ volume.orig_size }}</td></tr>
+            <tr><td>{% trans "New Size" %} </td><td>{{ volume.new_size }}</td></tr>
+        </tbody>
+    </table>
+    {% elif type == "resize_instance" %}
+    <h4>{% trans "Resize Instance" %}</h4>
+    <table class="flavor_table table-striped">
+        <tbody class="ticket_tbody">
+            <tr><td>{% trans "Name" %} </td><td>{{ instance.name }}</td></tr>
+        </tbody>
+    </table>
+    {% else %}
+        <h3>{% trans "Ticket Discription:" %}</h3>    
+        <p>{{description}}</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block modal-footer %}
+  <input class="btn btn-primary pull-right" type="submit" value="{% trans "Save Changes" %}" />
+  <a href="{% url 'horizon:openstack_plus:tickets:index' %}" class="btn btn-default secondary cancel close">{% trans "Cancel" %}</a>
+{% endblock %}

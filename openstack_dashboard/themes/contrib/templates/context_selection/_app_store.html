@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load url from future %}
+
+{% if can_access_app_store %}
+<div class="dropdown context-selection">
+  <a class="btn btn-default btn-topnav app" href="{% url 'horizon:project:applications:index' %}">
+    <span class="fa fa-rocket"></span>
+    <span class="nav-text">{% trans "App Store" %}</span>
+  </a>
+</div>
+{% endif %}

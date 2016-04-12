@@ -1,0 +1,275 @@
+.admin_overview {
+  .col-md-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .hardware,
+  .instance,
+  .storage,
+  .hypervisor {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #f6f6f6;
+    height: 110px;
+    h3 {
+      font-weight: 300;
+      font-size: 18px;
+    }
+    h5 {
+      font-size: 12px;
+      color: #666;
+      font-weight: 400;
+    }
+    h6 {
+      color: #999;
+      font-weight: 400;
+      font-size: 10px;
+    }
+    .col-md-4 {
+      padding-left: 5px;
+    }
+    .col-md-8 {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+  .instance,
+  .hardware,
+  .hypervisor {
+    h3 {
+      margin-top: 36px;
+    }
+  }
+  .hypervisor {
+    .version {
+      border-radius: 2px;
+      background: none repeat scroll 0 0 #f1f1f1;
+      border: 1px solid #efefef;
+      height: 90px;
+      position: relative;
+      text-align: center;
+      top: 9px;
+      h6 {
+        font-size: 11px;
+        &:nth-of-type(1) {
+          margin-top: 25px;
+        }
+      }
+    }
+  }
+  .hardware,
+  .instance,
+  .storage {
+    margin-top: 10px;
+  }
+  .storage {
+    h3 {
+      margin-top: 16px;
+    }
+    .progress {
+      width: 100%;
+      border-radius: 2px;
+      height: 10px;
+    }
+    .progress-bar-success {
+      background-color: #8fbc8f;
+    }
+    .usage {
+      background: none repeat scroll 0 0 #f1f1f1;
+      border: 1px solid #efefef;
+      border-radius: 2px;
+      height: 70px;
+      position: relative;
+      top: 9px;
+      h6 {
+        font-size: 11px;
+        &:nth-of-type(1) {
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+  .instance {
+    .summary {
+      padding-right: 0;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      border-radius: 2px;
+      background: none repeat scroll 0 0 #f1f1f1;
+      border: 1px solid #efefef;
+      height: 90px;
+      position: relative;
+      top: 9px;
+      h6 {
+        margin-top: 5px;
+        margin-bottom: 0;
+        display: block;
+      }
+    }
+  }
+  .hardware {
+    .version {
+      border-radius: 2px;
+      background: none repeat scroll 0 0 #f1f1f1;
+      border: 1px solid #efefef;
+      height: 90px;
+      position: relative;
+      top: 9px;
+      h6 {
+        font-size: 11px;
+        margin-top: 38px;
+      }
+    }
+  }
+  .chart_overview {
+    padding-left: 10px;
+    padding-right: 10px;
+    h5 {
+      font-size: 12px;
+      color: #666;
+      font-weight: 400;
+    }
+    .col-md-4,
+    .col-md-8 {
+      padding: 0;
+    }
+    .col-md-4 {
+      text-align: right;
+    }
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #f6f6f6;
+    height: 110px;
+    .chart_cluster {
+      color: #777;
+      font-size: 12px;
+      font-style: italic;
+      min-height: 58px;
+      min-width: 120px;
+      float: left;
+      width: 100%;
+      .x_tick {
+        border: none;
+      }
+      .x_label,
+      .y_grid,
+      .y_ticks {
+        display: none;
+      }
+      .detail {
+        .left,
+        .right {
+          width: auto;
+        }
+        background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+        .dot {
+          box-sizing: content-box;
+        }
+        .item:before {
+          left: -0.4em;
+        }
+      }
+    }
+    .chart_cluster.rickshaw_graph {
+      .x_tick {
+        .title {
+           bottom: -18px;
+           left: -18px;
+         }
+       }
+    }
+  }
+  .second {
+    margin-top: 10px;
+  }
+  .cpu_memory {
+    .col-md-6 {
+      padding-left: 10px;
+    }
+    h3 {
+      font-weight: 300;
+      font-size: 18px;
+    }
+    h5 {
+      font-size: 12px;
+      color: #666;
+      font-weight: 400;
+      height: 35px;
+    }
+    h6 {
+      color: #999;
+      font-weight: 300;
+      font-size: 10px;
+    }
+    margin-top: 10px;
+    .col-md-6 {
+      width: 49%;
+    }
+    .mem_usage,
+    .cpu_usage {
+      border: 1px solid #f6f6f6;
+      height: 110px;
+      background: none repeat scroll 0 0 #ffffff;
+    }
+    .mem_usage {
+      margin-left: 2%;
+    }
+  }
+  .compute {
+    overflow: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 230px;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #f6f6f6;
+    .service_name {
+      height: 30px;
+      border-bottom: 1px solid #f6f6f6;
+      .service_sum {
+        margin-top: 6px;
+      }
+      h5 {
+        font-size: 12px;
+        color: #666;
+        font-weight: 400;
+      }
+      .col-md-4 {
+        text-align: right;
+      }
+    }
+    .service_list {
+      height: 52px;
+      border-bottom: 1px solid #f6f6f6;
+      .col-md-4 {
+        text-align: right;
+      }
+      .service_sum {
+        margin-top: 6px;
+      }
+      h5 {
+        font-size: 12px;
+        color: #666;
+        font-weight: 300;
+        margin-bottom: 2px;
+      }
+      em {
+        font-size: 10px;
+        color: #777;
+      }
+      .status-up {
+        font-size: 16px;
+        color: #468847;
+        margin-top: 18px;
+      }
+      .status-down {
+        font-size: 16px;
+        color: #468847;
+        margin-top: 18px;
+      }
+    }
+    .col-md-4,
+    .col-md-8 {
+      padding: 0;
+    }
+  }
+}

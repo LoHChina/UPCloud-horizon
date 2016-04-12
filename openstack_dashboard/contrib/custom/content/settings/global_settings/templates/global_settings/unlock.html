@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Global Settings" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Global Settings")%}
+{% endblock page_header %}
+
+{% block main %}
+    {% include 'settings/global_settings/_unlock.html' %}
+{% endblock %}

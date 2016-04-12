@@ -1,0 +1,50 @@
+{% load i18n horizon humanize sizeformat %}
+
+<div class="compute">
+  <div class="service_name">
+    <div class="col-md-8 col-sm-10">
+      <h5>{% trans "Compute Services" %}</h5>
+    </div>
+    <div class="col-md-4">
+      <span class="badge service_sum">
+        {{ computer_services|length }}
+      </span>
+    </div>
+  </div>
+  {% for service in computer_services %}
+  <div class="service_list">
+    <div class="col-md-8 col-sm-10">
+      <h5>{{ service.binary }}</h5>
+      <em><i class="fa fa-clock-o"></i> {% trans "Updated at: " %}{{ service.updated_at|parse_isotime|timesince }}</em>
+    </div>
+    <div class="col-md-4">
+      <i class="fa fa-check-circle status-{{ service.state }}"></i>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="compute second">
+  <div class="service_name">
+    <div class="col-md-8 col-sm-10">
+      <h5>{% trans "Network Agents" %}</h5>
+    </div>
+    <div class="col-md-4">
+      <span class="badge service_sum">
+        {{ network_services|length }}
+      </span>
+    </div>
+  </div>
+  {% for service in network_services %}
+  <div class="service_list">
+    <div class="col-md-8 col-sm-10">
+      <h5>{{ service.binary }}</h5>
+      <em><i class="fa fa-clock-o"></i> {% trans "Updated at: " %}{{ service.heartbeat_timestamp|parse_isotime|timesince }}</em>
+      {{servi}}
+    </div>
+    <div class="col-md-4">
+      <i class="fa fa-check-circle status-{% if service.disabled %}down{% else %}up{% endif %}"></i>
+    </div>
+  </div>
+  {% endfor %}
+</div>

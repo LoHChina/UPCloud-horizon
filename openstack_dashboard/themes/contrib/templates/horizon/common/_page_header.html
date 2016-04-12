@@ -1,0 +1,20 @@
+{% load horizon branding i18n %}
+
+{% block page_header %}
+  <ul class="breadcrumbs">
+    <li><a href="{% site_branding_link %}"><i class="fa fa-home fa-1"></i></a></li>
+    {% if request.horizon.dashboard.slug != "project" and request.horizon.dashboard.slug != "overview" and request.horizon.dashboard.slug != "access_and_security_dashboard" %}
+      <li><span class="fa fa-angle-right"></span></li>
+      <li><a href="#">{{ request.horizon.dashboard.name }}</a></li>
+    {% endif %}
+    <li><span class="fa fa-angle-right"></span></li>
+    <li><a href="#">{{ title }}</a></li>
+  </ul>
+  <div class="pageheader">
+    <div class="pageicon"><span class="fa {{ request.horizon.panel.slug }}"></span></div>
+    <div class="pagetitle">
+      <h5>Powered by 99cloud</h5>
+      <h1>{{ title }}</h1>
+    </div>
+  </div>
+{% endblock %}

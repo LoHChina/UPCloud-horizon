@@ -1,0 +1,57 @@
+{% load i18n horizon humanize sizeformat %}
+{% load url from future %}
+
+<div class="chart_overview">
+  <div class="col-md-8">
+    <h5>{% trans "Cluster IOPS" %}</h5>
+  </div>
+  <div class="col-md-4">
+    <h5 class="iops hidden-xs hidden-sm"></h5>
+  </div>
+  <div class="chart_cluster"
+       data-chart-type="line_chart_overview"
+       data-type='volume_iops'
+       data-url="{% url 'horizon:admin:overviews:measurements' %}">
+  </div>
+</div>
+
+<div class="chart_overview second">
+  <div class="col-md-8">
+    <h5>{% trans "Cluster IO Bandwidth" %}</h5>
+  </div>
+  <div class="col-md-4">
+    <h5 class="io_bandwidth hidden-xs hidden-sm"></h5>
+  </div>
+  <div class="chart_cluster"
+       data-chart-type="line_chart_overview"
+       data-type='volume_throghput'
+       data-url="{% url 'horizon:admin:overviews:measurements' %}">
+  </div>
+</div>
+
+<div class="chart_overview second">
+  <div class="col-md-8">
+    <h5>{% trans "Cluster Net Bandwidth" %}</h5>
+  </div>
+  <div class="col-md-4">
+    <h5 class="network_bandwidth hidden-xs hidden-sm"></h5>
+  </div>
+  <div class="chart_cluster"
+       data-chart-type="line_chart_overview"
+       data-type='network_bandwidth'
+       data-url="{% url 'horizon:admin:overviews:measurements' %}">
+  </div>
+</div>
+
+<div class="cpu_memory">
+  <div class="col-md-6 col-xs-6 cpu_usage">
+    <h5>{% trans "Cluster CPU Usage" %}</h5>
+    <h3>{% widthratio stats.vcpus_used stats.vcpus 100 %} %</h3>
+    <h6>OF {{ stats.vcpus|intcomma }} CORES</h6>
+  </div>
+  <div class="col-md-6 col-xs-6 mem_usage">
+    <h5>{% trans "Cluster Memory Usage" %}</h5>
+    <h3>{% widthratio stats.memory_mb_used stats.memory_mb 100 %} %</h3>
+    <h6>OF {{ stats.memory_mb|mbformat }}</h6>
+  </div>
+</div>

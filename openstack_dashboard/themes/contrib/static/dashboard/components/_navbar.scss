@@ -1,0 +1,43 @@
+@import "../variables";
+
+.navbar.navbar-default {
+  border-bottom: none;
+  position:fixed;
+  z-index: 999;
+  width: 100%;
+  .navbar-brand {
+    padding-left: 55px;
+    padding-right: 56px;
+    img {
+      max-height: 35px;
+    }
+  }
+  .navbar-nav {
+    .dropdown-toggle {
+      opacity: 0.8;
+      background: $dropdown-toggle-bg;
+      border-left: 1px solid $dropdown-toggle-bg;
+      border-right: 1px solid $dropdown-toggle-bg;
+      color: #fff;
+      .context-overview {
+        padding: 0 3px;
+        font-weight: 300;
+      }
+    }
+    li, li.open {
+      .dropdown-menu {
+        margin-top: 0;
+        border-top: none;
+        &:before {
+          border: none;
+        }
+      }
+      a.dropdown-toggle {
+        &:hover, &:focus {
+          background: $dropdown-toggle-hover-bg;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

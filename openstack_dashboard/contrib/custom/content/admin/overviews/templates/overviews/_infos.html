@@ -1,0 +1,59 @@
+{% load i18n horizon humanize sizeformat %}
+
+<div class="hypervisor">
+  <div class="col-md-8">
+    <h5>{% trans "Hypervisor Summary" %}</h5>
+    <h3>{{ hypervisor }}</h3>
+    <h6>HYPEVISOR</h6>
+  </div>
+  <div class="col-md-4 version visible-lg">
+    <h6>{% trans "VERSION" %}</h6>
+    <h6>{{ hypervisor_version }}</h6>
+  </div>
+</div>
+
+<div class="storage">
+  <div class="col-md-8">
+    <h5>{% trans "Storage Summary" %}</h5>
+    <h3>{{ stats.free_gb|diskgbformat }}</h3>
+    <h6>{% trans 'FREE(PHYSICAL)' %}</h6>
+  </div>
+  {% with used=stats.local_gb_used|diskgbformat total=stats.local_gb|diskgbformat %}
+  <div class="col-md-4 usage visible-lg">
+    <h6>{% trans "USED : " %}{{ used }}</h6>
+    <h6>{% trans "TOTAL :" %}{{ total }}</h6>
+  </div>
+  {% endwith %}
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" style="width: {% widthratio stats.local_gb_used stats.local_gb 100 %}%;">
+    </div>
+  </div>
+</div>
+
+<div class="instance">
+  <div class="col-md-8">
+    <h5>{% trans "VM Summary" %}</h5>
+    <h3>{{ instances|length }}</h3>
+    <h6>VMS</h6>
+  </div>
+  <div class="col-md-4 summary visible-lg">
+    <div class="vms">
+      <h6 class="fa active"> {{ active_instances }} {% trans "ACTIVE" %}</h6>
+      <h6 class="fa shutoff"> {{ shutoff_instances }} {% trans "SHUTOFF" %}</h6>
+      <h6 class="fa suspended"> {{ suspended_instances }} {% trans "SUSPEND" %}</h6>
+      <h6 class="fa error"> {{ error_instances }} {% trans "ERROR" %}</h6>
+    </div>
+  </div>
+</div>
+
+<div class="hardware">
+  <div class="col-md-8">
+    <h5>{% trans "Hardware Summary" %}</h5>
+    <h3>{{ hosts }}</h3>
+    <h6>HOSTS</h6>
+  </div>
+  <div class="col-md-4 version visible-lg">
+    <h6>AS2000: {{ hosts }}</h6>
+  </div>
+</div>

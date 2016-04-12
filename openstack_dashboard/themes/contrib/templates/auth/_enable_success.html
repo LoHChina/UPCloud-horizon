@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-header %}{% trans "Activate account success" %}{% endblock %}
+
+{% block modal-body %}
+  <div class="register_success">
+    {% if error %}
+      <p>{% trans "Unable to activate account, please retry again." %}</p>
+    {% else %}
+      {% if enabled %}
+      <p>{% blocktrans %}Dear {{username}}, your account has been activated, {% endblocktrans %}<a href={% url "login" %}>{% trans "please log in." %}</a></p><br>
+      {% else %}
+      <p class="register_success_title">{% trans "Activate Account Success" %}</p><br>
+      <p>{% blocktrans %}Dear {{username}}, you have activate your account successfully, {% endblocktrans %}<a href={% url "login" %}>{% trans "please log in." %}</a></p><br>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}

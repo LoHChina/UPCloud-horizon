@@ -1,0 +1,22 @@
+// Contrib Variables
+$contrib-color: #bb2f0e;
+$dropdown-toggle-bg: rgba(255, 255, 255, 0.1);
+$dropdown-toggle-hover-bg: rgba(230, 230, 230, 0.1);
+$gray-border-color: #ebebeb;
+
+// Body Variables
+$body-bg-color: #f9f9fb;
+
+// Sidebar Variables
+$sidebar-bg-color: #232323;
+$sidebar-items-bg-color: #111111;
+$sidebar-font-color: #c3c3c3;
+
+// Basics of a navbar
+$navbar-height: 48px !default;
+$navbar-default-bg: $contrib-color !default;
+
+// Primary button Variables
+$btn-primary-color:              #fff !default;
+$btn-primary-bg:                 $contrib-color !default;
+$btn-primary-border:             darken($btn-primary-bg, 1%) !default;

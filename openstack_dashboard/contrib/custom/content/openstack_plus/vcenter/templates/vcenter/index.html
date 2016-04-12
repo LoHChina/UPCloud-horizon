@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{% trans "VMware vCenter" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("VMware vCenter")%}
+{% endblock page_header %}
+
+{% block main %}
+<div class="row">
+  <div class="col-sm-12">
+    {% for vcenter in vcenters %}
+    <div class="col-sm-3">
+      <div class="vmware-vcenter">
+        <a href="{% url "horizon:openstack_plus:vcenter:instances" vcenter.id %}">
+          <div class="add-vcenter">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-cloud fa-stack-2x"></i>
+              <i class="fa fa-building fa-stack-1x"></i>
+            </span>
+          </div>
+        </a>
+        <div class="add-text">vCenter : {{ vcenter.host_ip }}</div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col-sm-3">
+      <div class="vmware-vcenter">
+        <a href="{% url "horizon:openstack_plus:vcenter:new" %}" class="ajax-modal">
+          <div class="add-vcenter">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-cloud fa-stack-2x"></i>
+              <i class="fa fa-plus fa-stack-1x"></i>
+            </span>
+          </div>
+        </a>
+        <div class="add-text">{% trans "New vCenter Environment" %}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

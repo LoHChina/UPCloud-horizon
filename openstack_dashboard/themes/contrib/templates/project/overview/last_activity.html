@@ -1,0 +1,21 @@
+{% load i18n horizon humanize sizeformat %}
+<div class="limit-actity">
+  <div class="activity-title"><h4>{% trans "Last Activities" %}<!--a class="btn btn-primary btn-xs pull-right" href="#">{% trans "More" %}</a--></h4></div>
+  <div class="activity-body">
+    <table class="table table-hover">
+      <tbody class="activity-table">
+        {% for event in event_list %}
+        <tr>
+          <td>
+            <strong>{{event.event_type}}</strong><br>
+            <span>{{event.generated|parse_isotime}}</span><br><br>
+            <span class="activity-source">{{event.type_name}}:&nbsp;{{event.display_name}}</span>
+          </td>
+        <tr>
+        {% empty %}
+          <div class="empty_msg">{% trans "No activities" %}</div>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>

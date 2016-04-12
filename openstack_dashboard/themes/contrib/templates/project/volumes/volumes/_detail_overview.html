@@ -1,0 +1,95 @@
+{% load i18n sizeformat parse_date %}
+
+<div class="resource_overview">
+  <div class="col-md-6 resource_detail">
+    <div class="info detail">
+      <h4>{% trans "Information" %}</h4>
+      <hr class="header_rule">
+      <dl class="dl-horizontal">
+          <dt>{% trans "Name" %}</dt>
+          <dd>{{ volume.name }}</dd>
+          <dt>{% trans "ID" %}</dt>
+          <dd>{{ volume.id }}</dd>
+          {% if volume.description %}
+          <dt>{% trans "Description" %}</dt>
+          <dd>{{ volume.description }}</dd>
+          {% endif %}
+          <dt>{% trans "Status" %}</dt>
+          <dd>{{ volume.status|capfirst }}</dd>
+        {% for attachment in volume.attachments %}
+          <dt>{% trans "Attached To" %}</dt>
+          <dd>
+            {% url 'horizon:project:instances:detail' attachment.server_id as instance_url %}
+            {% blocktrans with instance_name=attachment.instance.name device=attachment.device %}
+            <a href="{{ instance_url }}">{{ instance_name }}</a> on {{ device }}
+            {% endblocktrans %}
+          </dd>
+        {% empty %}
+          <dt>{% trans "Attached To" %}</dt>
+          <dd><em>{% trans "Not attached" %}</em></dd>
+        {% endfor %}
+
+        {% if volume.transfer %}
+          <dt>{% trans "ID" %}</dt>
+          <dd>{{ volume.transfer.id }}</dd>
+          <dt>{% trans "Name" %}</dt>
+          <dd>{{ volume.transfer.name }}</dd>
+          <dt>{% trans "Created" context "Created time" %}</dt>
+          <dd>{{ volume.transfer.created_at|parse_date }}</dd>
+        {% endif %}
+      </dl>
+
+      <h4>{% trans "Specs" %}</h4>
+      <hr class="header_rule">
+      <dl class="dl-horizontal">
+          <dt>{% trans "Size" %}</dt>
+          <dd>{{ volume.size }} {% trans "GB" %}</dd>
+          <dt>{% trans "Created" context "Created time" %}</dt>
+          <dd>{{ volume.created_at|parse_date }}</dd>
+
+
+        {% if volume.metadata.items %}
+            {% for key, value in volume.metadata.items %}
+                <dt>{{ key }}</dt>
+                <dd>{{ value }}</dd>
+            {% endfor %}
+        {% endif %}    
+
+        {% if volume.volume_image_metadata %}
+          <dt>{% trans "Image" %}</dt>
+          <dd>
+          {% url 'horizon:project:images:images:detail' volume.volume_image_metadata.image_id as image_url %}
+          <a href="{{ image_url }}">{{ volume.volume_image_metadata.image_name }}</a>
+          </dd>
+        {% endif %}
+
+      </dl>
+    </div>
+  </div>
+  <!--
+  <div class="col-md-6">
+    <div class="resource_monitoring">
+      <div class="resource_info col-md-12">
+        <div class="col-md-6">
+          <h4>{% trans "IOPS" %}</h4>
+        </div>
+        <div class="col-md-6 unit">
+          <h5 class="iops hidden-xs hidden-sm">{% trans "Unit: bps | Interval: 5 Minutes" %}</h5>
+        </div>
+      </div>
+      <div class="resource_chart col-md-12">
+        <div id="y_axis_iops" class="y_axis"></div>
+        <div class="chart_overview">
+          <div class="chart_cluster"
+               data-chart-type="line_chart_resource"
+               data-type='iops'
+               data-url="/">
+          </div>
+        </div>
+      </div>
+      <div class="resource_metric resource_metric_iops col-md-12">
+      </div>
+    </div>
+  </div>
+  -->
+</div>

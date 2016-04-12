@@ -1,0 +1,32 @@
+@import "../variables";
+
+#main_content {
+  .nav-tabs {
+    border-top: none;
+    border-bottom: 1px solid $gray-border-color;
+    margin-bottom: 20px;
+    > li {
+      > a {
+        border: none;
+        color: #777;
+        &:hover {
+          background-color: $body-bg-color;
+          border: none;
+          border-bottom: 2px solid $contrib-color;
+          color: $contrib-color;
+        }
+      }
+      &.active > a {
+        &,
+        &:hover,
+        &:focus {
+          background-color: $body-bg-color;
+          border: none;
+          border-bottom: 2px solid $contrib-color;
+          color: $contrib-color;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-header %}{% trans "Register" %}{% endblock %}
+{% block modal_class %}login {% if hide %}modal hide{% endif %}{% endblock %}
+{% block form_attrs %}enctype="multipart/form-data"{% endblock %}
+
+
+{% block modal-body %}
+  {% if license_error %}
+  <div class="alert alert-message alert-danger">
+    {{ license_error }}
+  </div>
+  {% endif %}
+  <fieldset>
+    {% include "horizon/common/_form_fields.html" %}
+  </fieldset>
+{% endblock %}
+
+{% block modal-footer %}
+  <button type="submit" class="btn btn-primary pull-right">{% trans "Register" %}</button>
+  <div class="user_div">
+    <a href="{% url 'login' %}">{% trans "Back to Log In" %}</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% load i18n sizeformat %}
+{% load url from future %}
+
+<h4 class="query_title"><strong>{% trans "Query Condition" %}</strong></h4>
+
+<div class="resource_type">
+  <span class="query_type"><strong>{% trans "Resources" %}</strong></span>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="all" value="all" {% if query_type == "all" %} checked="true" {% endif %}> {% trans "All" %}
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="instance" value="instances" {% if query_type == "instances" %} checked="true" {% endif %}> {% trans "Instance" %}
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="image" value="images" {% if query_type == "images" %} checked="true" {% endif %}> {% trans "Image" %}
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="volume" value="volumes" {% if query_type == "volumes" %} checked="true" {% endif %}> {% trans "Volume" %}
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="snapshot" value="snapshot" {% if query_type == "snapshot" %} checked="true" {% endif %}> {% trans "Volume Snapshots" %}
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="network" value="network" {% if query_type == "network" %} checked="true" {% endif %}> {% trans "Network" %}
+  </label>
+  {% if not enable_network_overlay %}
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="floatingip" value="floatingip" {% if query_type == "floatingip" %} checked="true" {% endif %}> {% trans "Floating IP" %}
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="query_type" id="router" value="router" {% if query_type == "router" %} checked="true" {% endif %}> {% trans "Router" %}
+  </label>
+  {% endif %}
+</div>
+
+<div class="date_type">
+  <span class="query_type"><strong>{% trans "Month:" %}</strong></span>
+  <input id="date_month" type="text" value="{{date_month}}">
+</div>
+
+<div class="date_type">
+  <span class="query_type"><strong>{% trans "Tenant:" %}</strong></span>
+  <select id="tenant_name">
+    <option value ="">{% trans "Please select a tenant" %}</option>
+    {{tenants}}
+    {% for t in tenants %}
+    {% if tenant_id == t.id %}
+    <option value ="{{t.id}}" selected>{{t.name}}</option>
+    {% else %}
+    <option value ="{{t.id}}">{{t.name}}</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+</div>
+
+<a class="btn btn-primary btn-sm submit_btn" id="query_btn">{% trans "Query" %}</a>
+
+{{ table.render }}
+<script>
+$('#query_btn').click(function(){
+    var query_type = $("input[name='query_type']:checked").val();
+    var date_month = $("#date_month").val();
+    var tenant_id = $("#tenant_name").val();
+    date_list = date_month.split("-");
+    if(date_list.length != 2){
+        alert('{% trans "please input right month date format" %}');
+        return false;
+    }else{
+        list01 = date_list[0];
+        list02 = date_list[1];
+        var pattern = /\D/ig;
+        if(list01.length != 4 || pattern.test(list01) || list02.length != 2 || pattern.test(list02)){
+            alert('{% trans "please input right month date format" %}');
+            return false;
+        }
+    }
+
+    var default_href = '{% url 'horizon:openstack_plus:billing:index' %}';
+    var now_href = default_href + "?tab=summary_and_query__query_tab&query_type=" + query_type + "&date_month=" + date_month + "&tenant_id=" + tenant_id;
+    window.location.href = now_href;
+
+});
+</script>

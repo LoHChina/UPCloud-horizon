@@ -1,0 +1,64 @@
+@import "../variables";
+
+.pageicon {
+  border: 3px solid $contrib-color;
+  border-radius: 36px;
+  color: $contrib-color;
+  display: inline-block;
+  float: left;
+  font-size: 30px;
+  padding: 8px;
+  text-align: center;
+  width: 44px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.pagetitle {
+  margin-left: 90px;
+  padding-top: 5px;
+  h5 {
+    color: #999;
+    font-size: 10px;
+    font-weight: 300;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  h1 {
+    color: $contrib-color;
+    font-weight: 200;
+    font-size: 32px;
+    margin-left: -2px;
+    margin-top: 0px;
+  }
+}
+
+.pageheader {
+  background: none repeat scroll 0 0 #fff;
+  border-bottom: 1px solid $gray-border-color;
+  min-height: 68px;
+  padding: 15px 20px 10px;
+  position: relative;
+  margin-bottom: 20px;
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.breadcrumbs {
+  margin-left: -15px;
+  margin-right: -15px;
+  background: none repeat scroll 0 0 #ddd;
+  border-bottom: 1px solid #ccc;
+  height: 30px;
+  list-style: outside none none;
+  padding: 7px 0 4px 10px;
+  position: relative;
+  li {
+    color: #666;
+    display: inline-block;
+    float: left;
+    font-size: 11px;
+    margin-right: 5px;
+  }
+}

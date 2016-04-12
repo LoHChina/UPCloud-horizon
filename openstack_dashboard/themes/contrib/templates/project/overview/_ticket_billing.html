@@ -1,0 +1,47 @@
+{% load i18n horizon humanize sizeformat %}
+{% load url from future %}
+
+<div class="ticket-info">
+  <div class="col-md-12">
+    <div class="title">
+      <h4>{% trans "Tickets" %}</h4>
+      <a class="btn btn-primary btn-sm pull-right ajax-modal" href="{% url 'horizon:project_openstack_plus:project_tickets:create' %}">{% trans "Create Ticket" %}</a>
+    </div>
+    {% for ticket in tickets %}
+      <a href="{% url 'horizon:project_openstack_plus:project_tickets:detail' ticket.id %}">
+        <div class="ticket-details">
+          <span class="label {{ ticket.status_code|lower }}">{{ ticket.status }}</span>
+          <span class="ticket-title">{{ ticket.title }}</span>
+          <p>{{ ticket.description }}</p>
+          <span class="time">{% trans "Last Updated:" %} {{ ticket.updated_at|parse_isotime }}</span>
+        </div>
+      </a>
+    {% empty %}
+      <div class="empty_msg">{% trans "No tickets now" %}</div>
+    {% endfor %}
+    {% if tickets %}
+    <div class="all-tickets">
+      <a class="btn btn-primary btn-sm" href="{% url 'horizon:project_openstack_plus:project_tickets:index' %}">{% trans "All Tickets" %}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% comment %}
+<!--div class="billing-info">
+  <div class="col-md-12">
+    <div class="title">
+      <h4>{% trans "Billing Info" %}</h4>
+      <a class="search" href="{% url 'horizon:project:billing:index' %}?tab=summary_and_query__query_tab">{% trans "Query" %}</a>
+    </div>
+    <div class="details">
+      <dl class="dl-horizontal">
+        {% for resource in billing %}
+        <dt>{{ resource.obj_type }}</dt>
+        <dd>{{ resource.total_cost }}</dd>
+        {% endfor %}
+      </dl>
+    </div>
+  </div>
+</div--!>
+{% endcomment %}

@@ -1,0 +1,43 @@
+{% load i18n horizon humanize sizeformat %}
+{% load url from future %}
+
+<div class="limit-context">
+    <div class="title">
+        <h4>{% trans "Quotas Summary" %}</h4>
+        <a class="btn btn-primary btn-sm pull-right ajax-modal"  href="{% url 'horizon:project:overview:update' %}">{% trans "Apply Quotas" %}</a>
+    </div>
+
+	<div class="">
+		<div class="sort-title col-xs-12"><h5><strong>{% trans "Compute" %}</strong></h5></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Instances" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalInstancesUsed|intcomma}}/{{usage.limits.maxTotalInstances|quotainf|intcomma}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalInstancesUsed|intcomma usage.limits.maxTotalInstances|quotainf|intcomma 100 %}%"></span></div></dd></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "VCPUs" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalCoresUsed|intcomma}}/{{usage.limits.maxTotalCores|quotainf|intcomma}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalCoresUsed|intcomma  usage.limits.maxTotalCores|quotainf|intcomma 100 %}%"></span></div></dd></div>		
+		<div class="col-xs-12 dl-limit"><dt>{% trans "RAM" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalRAMUsed|mb_float_format}}/{{usage.limits.maxTotalRAMSize|quotainf|mb_float_format}}&nbsp;"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalRAMUsed usage.limits.maxTotalRAMSize 100 %}%"> </span></div></dd></div>
+	
+
+		<div class="sort-title col-xs-12"><h5><strong>{% trans "Network" %}</strong></h5></div>
+        {% if not enable_network_overlay %}
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Floating IPs" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalFloatingIpsUsed|intcomma}}/{{usage.limits.maxTotalFloatingIps}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalFloatingIpsUsed|intcomma usage.limits.maxTotalFloatingIps 100 %}%"></span></div></dd></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Routers" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalRoutersUsed|intcomma}}/{{usage.limits.maxTotalRouters|quotainf|intcomma}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalRoutersUsed|intcomma usage.limits.maxTotalRouters|quotainf|intcomma 100 %}%">  </span></div></dd></div>
+        {% endif %}
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Ports" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalPortsUsed|intcomma}}/{{usage.limits.maxTotalPorts|quotainf|intcomma}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalPortsUsed|intcomma usage.limits.maxTotalPorts|quotainf|intcomma 100 %}%">  </span></div></dd></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Networks" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalNetworksUsed}}/{{usage.limits.maxTotalNetworks}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalNetworksUsed usage.limits.maxTotalNetworks 100 %}%"> </span></div></dd></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Subnets" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalSunetsUsed}}/{{usage.limits.maxTotalSubnets}}(个)"><span class="progress-bar" role="progressbar" style="width:{% widthratio usage.limits.totalSunetsUsed usage.limits.maxTotalSubnets 100 %}%"></span></div></dd></div>
+
+
+		<div class="sort-title col-xs-12"><h5><strong>{% trans "Storage" %}</strong></h5></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Volumes" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalVolumesUsed}}/{{usage.limits.maxTotalVolumes}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalVolumesUsed usage.limits.maxTotalVolumes 100 %}%"> </span></div></dd></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Volume Storage" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalGigabytesUsed}}/{{usage.limits.maxTotalVolumeGigabytes}}&nbsp;(GB)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalGigabytesUsed  usage.limits.maxTotalVolumeGigabytes 100 %}%"> </span></div></dd></div>
+
+
+		<div class="sort-title col-xs-12"><h5><strong>{% trans "Security" %}</strong></h5></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Security Groups" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalSecurityGroupsUsed}}/{{usage.limits.maxSecurityGroups}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalSecurityGroupsUsed usage.limits.maxSecurityGroups 100 %}%"> </span></div></dd></div>
+		<div class="col-xs-12 dl-limit"><dt>{% trans "Key Pairs" %}</dt><dd><div class="progress" data-toggle="tooltip" data-placement="top" title="{{usage.limits.totalKeypairsUsed}}/{{usage.limits.maxTotalKeypairs}}&nbsp;(个)"><span class="progress-bar" role="progressbar"  style="width: {%  widthratio usage.limits.totalKeypairsUsed  usage.limits.maxTotalKeypairs 100 %}%"> </span></div></dd></div>
+	</div>
+
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

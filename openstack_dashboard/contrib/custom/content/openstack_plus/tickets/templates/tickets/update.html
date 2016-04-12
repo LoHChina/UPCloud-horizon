@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Manage Ticket" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Manage Ticket") %}
+{% endblock page_header %}
+
+{% block main %}
+  {% include 'openstack_plus/tickets/_update.html' %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% load i18n sizeformat parse_date %}
+{% load url from future %}
+
+<div class="ticket-overview">
+
+  <div class="ticket-detail">
+    <div class="ticket-title">
+      {{ticket.title}}
+      <span class="ticket-status {{ticket.status}}">{{ticket.status_desc}}</span>
+    </div>
+    <div>
+      <p>{% trans "Create Time" %}:&nbsp;{{ticket.created_at|parse_isotime}}</p>
+      <p>{{ticket.description}}</p>
+    </div>
+  </div>
+
+  {% if all_ticket_reply %}
+  <div>
+    {% for reply in all_ticket_reply %}
+      {% if reply.is_admin %}
+        <div class="ticket-reply ticket-admin">
+          <p>{{reply.content}}</p>
+          <p>{% trans "Administrator" %}</p>
+          <span class="reply-time">{{reply.created_at|parse_isotime}}</span>
+        </div>
+      {% else %}  
+        <div class="ticket-reply ticket-normal">
+          <p>{{reply.content}}</p>
+          <span class="reply-time">{{reply.created_at|parse_isotime}}</span>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if ticket.status != "closed" %}
+    <form id="ticket-form" action= "{% url 'horizon:project_openstack_plus:project_tickets:detail' ticket_id %}" method="POST">{% csrf_token %}
+      <div class="left">
+        <fieldset>
+          {% include "horizon/common/_form_fields.html" %}
+          </fieldset>
+      </div>
+      <div class="right">
+        <button type="submit" id="ticket-btn" class="btn btn-primary">{% trans "Reply" %}</button>
+      </div>
+    </form>
+  {% endif %}
+
+</div>
+

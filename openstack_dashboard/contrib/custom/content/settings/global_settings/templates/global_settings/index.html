@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Global Settings"%}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Global Settings") %}
+{% endblock page_header %}
+
+{% block main %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="resource_overview">
+      <div class="col-md-8 resource_detail">
+        <div class="info detail">
+          <h4>{% trans "Global Settings" %}</h4>
+          <hr class="header_rule">
+          <dl class="dl-horizontal">
+            {% for feature in features %}
+              {% if not feature.3 %}
+              <dt>{{ feature.0 }}</dt>
+              <dd>
+                <div class="switch"><input class="{{ feature.2 }} switch_feature" type="checkbox" {% if feature.1 %}checked{% endif %} />
+                <a class="ajax-modal" href="{% url 'horizon:settings:global_settings:unlock' feature.2 %}">
+                <img src="{{ STATIC_URL }}dashboard/img/lock.png" style="width:21px; height: 21px;">
+                </a></div>
+              </dd>
+              {% else %}
+              <dt>{{ feature.0 }}</dt>
+              <dd>
+                <div class="switch"><input class="{{ feature.2 }} switch_feature" type="checkbox" {% if feature.1 %}checked{% endif %} /></div>
+              </dd>
+              {% endif %}
+              <script type="text/javascript">
+                if ('{{ feature.3 }}' == 'False' ){
+                    $('.{{ feature.2 }}').prop('disabled', true);
+                }
+                $('.{{ feature.2 }}').on('switchChange.bootstrapSwitch', function(event, state) {
+                  console.log(this.checked)
+                  if (this.checked) {
+                    checked = true;
+                  } else {
+                    checked = false;
+                  }
+                  $("input.switch_feature").prop('disabled', true);
+                  var final_url = '{% url "horizon:settings:global_settings:update" %}'
+                  var data = {'name': '{{ feature.2 }}', 'value': checked, csrfmiddlewaretoken: '{{ csrf_token }}'}
+                  send_ajax(final_url, data)
+                });
+              </script>
+            {% endfor %}
+            {% for field in form.visible_fields %}
+              {% if field.field.widget.attrs %}
+              <dt>
+                {{ field.label }}:
+              </dt>
+              <dd>
+                {{ field }}
+                <a class="ajax-modal" href="{% url 'horizon:settings:global_settings:unlock' field.help_text %}">
+                <img src="{{ STATIC_URL }}dashboard/img/lock.png" style="width:21px; height: 21px;">
+                </a>
+              </dd>
+              {% else %}
+              <dt>
+                {{ field.label }}:
+              </dt>
+              <dd>
+                {{ field }}
+              </dd>
+              {% endif %}
+                <script type="text/javascript">
+                  $("#" + $('{{ field }}').attr('id')).blur(function(){
+                    var final_url = '{% url "horizon:settings:global_settings:update" %}'
+                    var my_value = $(this).val();
+                    var my_name = $('{{ field }}').attr('name');
+                    if(my_value == '' || my_value.substr(0,4).toLowerCase()=="http")
+                        var url = my_value
+                    else
+                        var url = "http://" + my_value
+                    var data = {'name': my_name, 'value': 'true', 'extra': url, csrfmiddlewaretoken: '{{ csrf_token }}'}
+                    send_ajax(final_url, data)
+                  });
+                </script>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    $.fn.bootstrapSwitch.defaults.size = 'mini';
+    $(".switch_feature").bootstrapSwitch();
+});
+function send_ajax(final_url, data) {
+  var v_name = data.name
+  var v_value = data.value
+  $.ajax({
+    method: "POST",
+    url: final_url,
+    data: data,
+    success: function (data, textStatus, jqXHR) {
+       if (v_name == "enable_metering_feature"){
+         if (v_value == true){
+           horizon.alert("success", gettext("Billing feature has been opened," +
+                         "please open the Ceilometer service in the background."));
+         }
+         else {
+           horizon.alert("success", gettext("Billing feature has been closed," +
+                         "please shutdown the Ceilometer service in the background."));
+         }
+       }
+       else if (v_name == "enable_network_overlay" ){
+         if (v_value == true){
+           horizon.alert("success", gettext("Overlay network feature has been opened," +
+                         "please open the Neutron service in the background."));
+         }
+         else {
+           horizon.alert("success", gettext("Overlay network feature has been closed," +
+                         "please shutdown the Neutron service in the background."));
+         }
+       }
+       else {
+         horizon.alert("success", gettext("Global settings update successfully."));
+       }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      horizon.alert("error", gettext("An error occurred. Please try again later."));
+    },
+    complete: function (data, textStatus, jqXHR) {
+      $("input.switch_feature").prop('disabled', false);
+      horizon.autoDismissAlerts();
+    }
+  });
+}
+</script>
+{% endblock %}

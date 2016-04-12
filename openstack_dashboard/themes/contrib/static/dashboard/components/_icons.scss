@@ -1,0 +1,212 @@
+/* Contrib icons */
+#sidebar-accordion {
+  .overview {
+    font-size: 13.8px;
+  }
+}
+
+.pageicon {
+  .overview {
+    font-size: 30px;
+  }
+}
+
+.pageicon,
+#sidebar-accordion {
+
+  .instances:before,
+  .databases:before,
+  .compute:before {
+    content: $fa-var-laptop;
+  }
+
+  .images:before {
+    content: $fa-var-camera;
+  }
+
+  .storage:before,
+  .volumes:before {
+    content: $fa-var-hdd-o;
+  }
+
+  .network:before,
+  .network_topology:before,
+  .logical_topology:before {
+    content: $fa-var-sitemap;
+  }
+
+  .security:before,
+  .security_groups:before,
+  .access_and_security:before,
+  .access_and_security_dashboard:before {
+    content: $fa-var-lock;
+  }
+
+  .identity:before,
+  .users:before {
+    content: $fa-var-user;
+  }
+
+  .projects:before {
+    content: $fa-var-users;
+  }
+
+  .networks:before {
+    content: $fa-var-signal;
+  }
+
+  .routers:before {
+    content: $fa-var-random;
+  }
+
+  .overview:before {
+    content: $fa-var-tachometer;
+  }
+
+  .overviews:before {
+    content: $fa-var-tachometer;
+  }
+
+  .orchestration:before,
+  .stacks:before {
+    content: $fa-var-cogs;
+  }
+
+  .object_store:before,
+  .containers:before {
+    content: $fa-var-folder;
+  }
+
+  .keypairs:before {
+    content: $fa-var-key;
+  }
+
+  .info:before {
+    content: $fa-var-info-circle;
+  }
+
+  .defaults:before {
+    content: $fa-var-star;
+  }
+
+  .flavors:before,
+  .resource_types:before {
+    content: $fa-var-flag;
+  }
+
+  .admin:before {
+    content: $fa-var-cloud;
+  }
+
+  .metadata_defs:before {
+    content: $fa-var-th;
+  }
+
+  .aggregates:before {
+    content: $fa-var-tasks;
+  }
+
+  .hypervisors:before {
+    content: $fa-var-cubes;
+  }
+
+  .user:before,
+  .settings:before {
+    content: $fa-var-cog;
+  }
+
+  .global_settings:before {
+    content: $fa-var-cog;
+  }
+
+  .password:before {
+    content: $fa-var-shield;
+  }
+
+  .floating_ips:before {
+    content: $fa-var-globe;
+  }
+
+  .applications:before {
+    content: $fa-var-rocket;
+  }
+
+  .database:before {
+    content: $fa-var-database;
+  }
+
+  .database_backups:before {
+    content: $fa-var-camera;
+  }
+
+  .data_processing:before {
+    content: $fa-var-exchange;
+  }
+
+  .firewalls:before {
+    content: $fa-var-flash;
+  }
+
+  .loadbalancers:before {
+    content: $fa-var-road;
+  }
+
+  .metering:before {
+    content: $fa-var-bar-chart-o;
+  }
+
+  .tickets:before,
+  .project_tickets:before {
+    content: $fa-var-ticket;
+  }
+
+  .email_settings:before {
+    content: $fa-var-envelope;
+  }
+
+  .management:before {
+    content: $fa-var-graduation-cap;
+  }
+
+  .announcement:before {
+    content: $fa-var-bullhorn;
+  }
+
+  .userstatistics:before {
+    content: $fa-var-bar-chart-o;
+  }
+
+  .billing:before {
+    content: $fa-var-credit-card;
+  }
+
+  .openstack_plus:before,
+  .project_openstack_plus:before {
+    content: $fa-var-plus;
+  }
+
+  .vcenter:before {
+    content: $fa-var-building;
+  }
+}
+
+.admin_overview {
+  .summary {
+    .active:before {
+      content: $fa-var-circle;
+      color: #8fbc8f;
+    }
+    .shutoff:before {
+      content: $fa-var-circle;
+      color: #888;
+    }
+    .suspended:before {
+      content: $fa-var-circle;
+      color: #ff8c00;
+    }
+    .error:before {
+      content: $fa-var-circle;
+      color: #ae0000;
+    }
+  }
+}

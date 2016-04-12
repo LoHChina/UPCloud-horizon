@@ -1,0 +1,9 @@
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-body %}
+  <div class="register_success">
+    <p class="register_success_title">{% trans "Mail has been sent" %}</p><br>
+    <p>{% blocktrans %}Dear {{username}}, the mail has been sent to {{username}}, Please check your email to reset password.{% endblocktrans %}</p><br>
+  </div>
+{% endblock %}

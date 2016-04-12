@@ -1,0 +1,96 @@
+.ticket-overview{
+  width: 700px;
+  .ticket-title{
+    font-size: 17px;
+    margin-bottom:15px;
+  }
+
+  .ticket-status{
+    border-radius: 2px;
+    float: right;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 16px;
+    margin-top: 6px;
+    padding: 6px 17px;
+    color: #fff;
+  }
+  .new {
+    background: #3a87ad none repeat scroll 0 0;
+  }
+  .closed {
+    background: #b3b3b3 none repeat scroll 0 0;
+  }
+  .feedback {
+    background: #f89406 none repeat scroll 0 0;
+  }
+
+
+  #id_reply {
+    height: 110px;
+  }
+
+  #ticket-form{
+    margin-top:60px;
+    padding-left:15px;
+  }
+
+  #ticket-form .left{
+    width: 552px;
+    margin-left:38px;
+  }
+
+  #ticket-form .right{
+    width: 80px;
+    float: right;
+  }
+
+  #ticket-btn{
+    margin-top: 25px;
+    height: 106px;
+    width: 76px;
+  }
+
+  .ticket-detail{
+    background: none repeat scroll 0 0 #fff;
+    color: #555;
+    margin-top: 6px;
+    padding: 20px 20px 20px 30px;
+    margin-bottom:60px;
+    font-size:14px;
+  }
+
+  .ticket-reply{
+    border-radius: 3px;
+    margin-left: 50px;
+    overflow: hidden;
+    padding: 10px 12px;
+    color: #58666e;
+    margin-bottom:20px;
+  }
+
+  .ticket-admin{
+    background: none repeat scroll 0 0 #e9eef0;
+  }
+
+  .ticket-normal{
+    background: none repeat scroll 0 0 #fff;
+  }
+
+  .reply-time{
+    font-size:12px;
+    font-style: italic;
+  }
+}
+
+.ticket-status{
+  .new {
+    background: #3a87ad none repeat scroll 0 0;
+  }
+  .closed {
+    background: #b3b3b3 none repeat scroll 0 0;
+  }
+  .feedback {
+    background: #f89406 none repeat scroll 0 0;
+  }
+}

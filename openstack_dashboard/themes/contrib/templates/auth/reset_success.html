@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Reset Password Success" %}{% endblock %}
+
+{% block body_id %}splash{% endblock %}
+
+{% block content %}
+  {% include "horizon/_messages.html" %}
+  {% include 'auth/_reset_success.html' %}
+{% endblock %}

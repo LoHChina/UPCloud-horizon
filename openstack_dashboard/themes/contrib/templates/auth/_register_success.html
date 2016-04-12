@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-header %}{% trans "Register Success" %}{% endblock %}
+
+{% block modal-body %}
+  <div class="register_success">
+    <p class="register_success_title">{% trans "Register success" %}</p><br>
+    <p>{% blocktrans %}Dear {{username}}, a confirmation letter was sent to your email address {{username}}. Please login your email to activate your account.{% endblocktrans %}</p><br>
+  </div>
+{% endblock %}

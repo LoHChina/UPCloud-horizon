@@ -1,0 +1,10 @@
+{% extends "../../openstack_dashboard/templates/base.html" %}
+
+{% block css %}
+  {% include "_stylesheets.html" %}
+
+  {% load compress %}
+  {% compress css %}
+  <link href='{{ STATIC_URL }}custom/css/bootstrap-switch.css' type='text/css' media='screen' rel='stylesheet' />
+  {% endcompress %}
+{% endblock %}

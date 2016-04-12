@@ -1,0 +1,21 @@
+.vmware-vcenter {
+  background: #fff none repeat scroll 0 0;
+  border: 1px none #111;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+  height: 180px;
+  padding-top: 18px;
+  text-align: center;
+  .fa-cloud {
+    color: $contrib-color;
+  }
+  .fa-plus, .fa-building {
+    color: #fff;
+  }
+  .fa-lg {
+    font-size: 4.33333em;
+  }
+  .add-text {
+    color: #777;
+  }
+}

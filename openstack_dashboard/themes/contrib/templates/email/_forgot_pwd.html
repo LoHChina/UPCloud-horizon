@@ -1,0 +1,19 @@
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-body %}
+<table width="762" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td style="padding-top:20px;padding-bottom:20px; width:762px; font-family:'微软雅黑'">
+            <table border="0" cellpadding="0" cellspacing="0" style="width:762px;">
+                <tr>
+                    <td style="border:1px solid #dadada; border-top:none; text-align:left; line-height:22px; font-family:'微软雅黑' ">
+                        <p style="font-size:17px; font-weight:bold; padding:28px 10px 8px 20px; margin:0px;">亲爱的{{email}}</p><br>
+                        <p style="font-size:15px; padding:8px 10px 6px 40px; margin:0px;">请点击下面的链接来重置密码，<br><a href="{{forgot_pwd_url}}">{{forgot_pwd_url}}</a><br>如果以上链接无法点击，请将上面的地址复制到您的浏览器(如IE)的地址栏.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{% endblock %}

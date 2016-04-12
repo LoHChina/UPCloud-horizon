@@ -1,0 +1,11 @@
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-header %}{% trans "Register Success" %}{% endblock %}
+
+{% block modal-body %}
+  <div class="register_success">
+    <p class="register_success_title">{% trans "Reset password success" %}</p><br>
+    <p>{% blocktrans %}Dear {{username}}, you have reset your password successfully, {% endblocktrans %}<a href={% url "login" %}>{% trans "please log in" %}</a></p><br>
+  </div>
+{% endblock %}

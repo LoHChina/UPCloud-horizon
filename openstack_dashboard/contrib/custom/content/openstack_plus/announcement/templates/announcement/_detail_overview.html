@@ -1,0 +1,31 @@
+{% load i18n sizeformat %}
+
+<div class="resource_overview">
+  <div class="col-md-6 resource_detail">
+    <div class="info detail">
+      <h4>{% trans "Information" %}</h4>
+      <hr class="header_rule">
+      <dl class="dl-horizontal">
+        <dt>{% trans "Title" %}</dt>
+        <dd><a>{{ announcement.title|default:_("None") }}</a></dd>
+        {% if announcement.description %}
+          <dt>{% trans "Description" %}</dt>
+          <dd>{{ announcement.description }}</dd>
+        {% endif %}
+        <dt>{% trans "Created" %}</dt>
+        <dd>{{ announcement.created_at|parse_isotime }}</dd>
+        <dt>{% trans "Rotation(days)" %}</dt>
+        <dd>{{ announcement.keep_days }}</dd>
+        <dt>{% trans "Expired" %}</dt>
+        <dd>{{ expired }}</dd>
+      </dl>
+
+      <h4>{% trans "Content" %}</h4>
+      <hr class="header_rule">
+      <dl class="dl-horizontal">
+        <dt>{% trans "Content" %}</dt>
+        <dd>{{ announcement.content }}</dd>
+      </dl>
+    </div>
+  </div>
+</div>

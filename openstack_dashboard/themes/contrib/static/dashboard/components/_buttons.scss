@@ -1,0 +1,15 @@
+@import "/bootstrap/scss/bootstrap/mixins/buttons";
+
+/* Primary button */
+.btn-primary {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+
+/* Button radius */
+.btn-sm, .btn-group-sm .btn {
+  border-radius: 0px;
+}
+
+.btn {
+  border-radius: 2px;
+}

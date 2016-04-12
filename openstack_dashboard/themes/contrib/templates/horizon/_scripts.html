@@ -1,0 +1,7 @@
+{% extends "../../openstack_dashboard/templates/horizon/_scripts.html" %}
+{% block custom_js_files %}
+  <script src='{{ STATIC_URL }}custom/js/bootstrap-switch.js'></script>
+  <script src='{{ STATIC_URL }}custom/js/horizon.d3linechart_overview.js'></script>
+  <script src='{{ STATIC_URL }}custom/js/horizon.d3linechart_resource.js'></script>
+  <script src='{{ STATIC_URL }}custom/js/horizon.logicaltopology.js'></script>
+{% endblock %}

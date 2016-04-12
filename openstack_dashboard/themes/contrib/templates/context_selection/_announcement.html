@@ -1,0 +1,28 @@
+{% load i18n %}
+{% load url from future %}
+
+{% if announcement_list %}
+<ul class="nav navbar-nav" {% if announcement_len > 1 %}id="sItem"{% else %}id="sItem-one"{% endif %}>
+  {% for item in announcement_list %}
+  <li class="dropdown"><a class="ajax-modal dropdown-toggle" href="{% url 'horizon:project_openstack_plus:project_announcement:get_announcement' item.id %}">
+    <span class="fa fa-bullhorn"></span>
+    <span class="nav-text">{{item.title}}</span>
+  </a></li>
+  {% endfor %}
+</ul>
+<script>
+$(document).ready(function(){
+    $("#sItem li:not(:first)").css("display","none");
+    var B=$("#sItem li:last");
+    var C=$("#sItem li:first");
+    setInterval(function(){
+    if(B.is(":visible")){
+    C.fadeIn(500).addClass("in");B.hide()
+    }else{
+    $("#sItem li:visible").addClass("in");
+    $("#sItem li.in").next().fadeIn(500);
+    $("li.in").hide().removeClass("in")}
+    },3000)
+})
+</script>
+{% endif %}

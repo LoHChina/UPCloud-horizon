@@ -1,0 +1,11 @@
+@import "../variables";
+
+body {
+  &:not(#splash) {
+    background-image: none;
+    background: $body-bg-color;
+  }
+  #content_body {
+    padding-top: $navbar-height;
+  }
+}

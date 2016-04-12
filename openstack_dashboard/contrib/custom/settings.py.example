@@ -1,0 +1,116 @@
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+import os
+
+from django.utils.translation import ugettext_lazy as _  # noqa
+
+from openstack_dashboard.settings import HORIZON_CONFIG
+from openstack_dashboard.settings import INSTALLED_APPS
+from openstack_dashboard.settings import MIDDLEWARE_CLASSES
+from openstack_dashboard.settings import ROOT_PATH
+from openstack_dashboard.settings import TEMPLATE_CONTEXT_PROCESSORS
+
+
+ENABLE_CUSTOMIZATION = True
+if ENABLE_CUSTOMIZATION:
+    INSTALLED_APPS = list(INSTALLED_APPS)
+    INSTALLED_APPS.append('openstack_dashboard.contrib.custom')
+    HORIZON_CONFIG["customization_module"] = (
+        "openstack_dashboard.contrib.custom.overrides")
+
+CUSTOM_THEME_PATH = 'themes/contrib'
+
+# DB CONNECTION
+CONNECTION = "mysql://root:password@localhost/animbus"
+
+# Contrib middleware
+MIDDLEWARE_CLASSES += (
+    'openstack_dashboard.contrib.custom.middleware.ContribMiddleware',
+)
+
+# Contrib TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'openstack_dashboard.contrib.custom.context_processors.Contribopenstack',
+    )
+
+# Add vcenter template name in this config, ('template name', template name),
+# like:
+# VCENTER_TEMPLATE_SETTINGS = {
+#     'vcenter_template': [
+#         ('', _('Select Template')),
+#         ('template1', 'template1'),
+#         ('template1', 'template1'),
+#         ('template1', 'template1')
+#     ]
+# }
+
+# Add user login statistics for admin
+AUTHENTICATION_BACKENDS = (
+    'openstack_dashboard.contrib.custom.animbus_backend.'
+    'AnimbusKeystoneBackend',
+)
+
+# The OPENSTACK_HEAT_STACK settings can be used to disable password
+# field required while launching the stack.
+ANIMBUS_HEAT_STACK = {
+    'enable_user_pass': False,
+}
+
+# Add Ceilometer Mongo URI
+MONGO_URI = "mongodb://192.168.199.238:27017/"
+
+# Add Animbus Prices
+ANIMBUS_PRICES = {
+    "instance_available": {
+        "m1.tiny": 0.04,
+        "m1.small": 0.06,
+        "m1.medium": 0.08,
+        "m1.large": 0.10,
+        "m1.xlarge": 0.12
+    },
+    "instance_power_off": {
+        "m1.tiny": 0.02,
+        "m1.small": 0.03,
+        "m1.medium": 0.04,
+        "m1.large": 0.05,
+        "m1.xlarge": 0.06
+    },
+    "volume": 0.01,
+    "volume_snapshot": 0.01,
+    "network": 0.01,
+    "floatingip": 0.02,
+    "router": 0.01,
+    "image": 0.01
+}
+
+# Overcommitment ratio for virtual to physical CPUs RAM and Disk.
+CONFIG_CPU_ALLOC_RATIO = 16.0
+CONFIG_RAM_ALLOC_RATIO = 1.5
+CONFIG_DISK_ALLOC_RATIO = 1.0
+
+# add the STORAGE_PATH to ANIMBUS_STORAGE_PATH
+# ANIMBUS_STORAGE_PATH = (
+#     '/openstack/nova',
+#     '/openstack/cinder',
+# )
+
+OS_USERNAME = "admin"
+OS_PASSWORD = "123456"
+OS_TENANT_NAME = "admin"
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_DIR = os.path.join(ROOT_PATH, "themes/contrib/templates/email")
+DOMAIN_NAME = None
+ENDPOINT = 'http://127.0.0.1:35357/v2.0'
+ADMIN_TOKEN = 'b2930c627e8543e892392aacfd705e5d'

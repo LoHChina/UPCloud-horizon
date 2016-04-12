@@ -1,0 +1,15 @@
+{% extends "horizon/common/_modal.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block modal-header %}{{ announcement.title }}{% endblock %}
+
+{% block modal-body %}
+<div class="info detail">
+  <p>{{ announcement.content }}</p>
+</div>
+{% endblock %}
+
+{% block modal-footer %}
+  <a class="btn btn-primary cancel">{% trans "Confirm" %}</a>
+{% endblock %}
